@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class Config {
-    private static final String PROPERTIES_FILE = "./resources/config.properties";
+    private static final String PROPERTIES_FILE = "./src/main/resources/config.properties";
 
     public static int PORT;
     //public static int HISTORY_LENGTH;
@@ -18,9 +18,9 @@ public class Config {
             propertiesFile = new FileInputStream(PROPERTIES_FILE);
             properties.load(propertiesFile);
 
-            PORT             = Integer.parseInt(properties.getProperty("PORT"));
+            PORT = Integer.parseInt(properties.getProperty("PORT"));
             //HISTORY_LENGTH   = Integer.parseInt(properties.getProperty("HISTORY_LENGTH"));
-            HELLO_MESSAGE    = properties.getProperty("HELLO_MESSAGE");
+            HELLO_MESSAGE = properties.getProperty("HELLO_MESSAGE");
 
         } catch (FileNotFoundException ex) {
             System.err.println("Properties config file not found");
