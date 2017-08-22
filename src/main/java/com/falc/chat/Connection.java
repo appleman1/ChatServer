@@ -13,24 +13,18 @@ public class Connection extends Thread {
     private String name = "";
     private Socket socket;
     private static ArrayList<Connection> connections = new ArrayList<>();
-
     public static ArrayList<Connection> getConnections() {
         return connections;
     }
-
-    public Connection(Socket socket) throws IOException {
+    public Connection(Socket socket){
         this.socket = socket;
-        try {
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            out = new PrintWriter(socket.getOutputStream(), true);
-        } catch (IOException e) {
-            e.printStackTrace();
-
-        }
     }
-
     public void run() {
         try {
+
+            in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+            out = new PrintWriter(this.socket.getOutputStream(), true);
+
             name = in.readLine();
 
             for (Connection c : connections) {
@@ -53,13 +47,13 @@ public class Connection extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            try {
-                in.close();
-                out.close();
+            /*try {
+                *//*in.close();
+                out.close();*//*
 
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
     }
 }
