@@ -35,18 +35,16 @@ public class Server {
         try {
             while (true) {
                 Socket socket = server.accept();
-
                 service.submit(new Runnable() {
-
                     @Override
                     public void run() {
                         try {
-
-                            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                            Socket thisSoket = socket;
+                            BufferedReader in = new BufferedReader(new InputStreamReader(thisSoket.getInputStream()));
+                            PrintWriter out = new PrintWriter(thisSoket.getOutputStream(), true);
 
                             String name = in.readLine();
-                            mapClients.putIfAbsent(name,out);
+                            mapClients.putIfAbsent(name, out);
 
 
                             for (Map.Entry<String, PrintWriter> pair : mapClients.entrySet()) {
